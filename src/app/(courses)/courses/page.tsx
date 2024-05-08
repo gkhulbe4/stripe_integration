@@ -1,5 +1,7 @@
+import { authOptions } from "@/lib/auth";
 import db from "@/lib/db";
 import { formatPrice } from "@/lib/utils/convertToCents";
+import { getServerSession } from "next-auth";
 import Link from "next/link";
 import React from "react";
 
@@ -12,7 +14,10 @@ type Course = {
 };
 
 async function Courses() {
+  const session = await getServerSession(authOptions)
   const courses = await db.course.findMany();
+
+  if(!session?.user) return <>Please signin to see the courses</>
   return (
     <div className="flex flex-col gap-3">
       {courses.map((course: Course) => (
