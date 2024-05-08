@@ -2,6 +2,7 @@
 import React from 'react'
 import { useParams } from 'next/navigation'
 import axios from 'axios'
+import { toast } from 'sonner'
 
 function Course() {
   const params = useParams<{courseId: string}>()
@@ -12,7 +13,7 @@ function Course() {
       console.log(res.data);
       window.location.assign(res.data.url)
     }catch(error){
-      alert(error)
+      toast.error("An error occurred")
     }
   }
   return (
