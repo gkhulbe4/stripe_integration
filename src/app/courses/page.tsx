@@ -5,7 +5,7 @@ import React from "react";
 
 type Course = {
   title: string;
-  price: number;
+  priceInCents: number;
   id: string;
   createdAt: Date;
   updatedAt: Date;
@@ -22,7 +22,7 @@ async function Courses() {
           className="flex gap-3 cursor-pointer p-3 border borde-gray-200"
         >
           <h1>{course.title}</h1>
-          <h1>{formatPrice(course.price!)}</h1>
+          <h1>{formatPrice(course.priceInCents!)}</h1>
         </Link>
       ))}
     </div>

@@ -39,7 +39,7 @@ export async function POST(
     if (!course) {
       return new NextResponse("Course not found", { status: 404 });
     }
-    console.log(course.price! , "this is in cents");
+    console.log(course.priceInCents! , "this is in cents");
 
     const purchase = await db.purchase.findUnique({
       where: {
@@ -61,7 +61,7 @@ export async function POST(
           product_data: {
             name: course.title!,
           },
-          unit_amount: course.price!,
+          unit_amount: course.priceInCents!,
         },
       }, 
     ];

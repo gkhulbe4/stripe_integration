@@ -11,7 +11,7 @@ export const createCourse = async(formData: FormData) => {
     const course = await db.course.create({
         data: {
             title: title,
-            price: convertedPrice
+            priceInCents: convertedPrice
         }
     })
     if(course) console.log("Course created" , course.id);
