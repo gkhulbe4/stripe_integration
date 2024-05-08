@@ -25,7 +25,7 @@ export async function POST(
         id: true,
       },
     });
-
+    console.log("got user id");
     if (!userId) {
       return new NextResponse("UserID not found", { status: 404 });
     }
@@ -35,10 +35,11 @@ export async function POST(
         id: params.courseId,
       },
     });
-
+    console.log("got course id");
     if (!course) {
       return new NextResponse("Course not found", { status: 404 });
     }
+    console.log(course.price! , "this is in cents");
 
     const purchase = await db.purchase.findUnique({
       where: {
@@ -48,11 +49,10 @@ export async function POST(
         },
       },
     });
-
+    console.log("new purchaser");
     if (purchase) {
       return new NextResponse("You have already purchased it", { status: 400 });
     }
-
     const line_items: Stripe.Checkout.SessionCreateParams.LineItem[] = [
       {
         quantity: 1,
@@ -61,7 +61,7 @@ export async function POST(
           product_data: {
             name: course.title!,
           },
-          unit_amount: course.price! * 100,
+          unit_amount: course.price!,
         },
       }, 
     ];
